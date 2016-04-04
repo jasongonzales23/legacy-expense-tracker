@@ -39,5 +39,14 @@
         Add This
       </button>
     </div>
+    <div>
+      {{#each budgets}}
+      {{> thing}}
+      {{/each}}
+    </div>
   </div>
+</template>
+
+<template name="thing">
+  <p>{{amount}} {{description}}</p>
 </template>
