@@ -40,6 +40,8 @@ Template.Home.helpers({
       limit: 1
     }).fetch();
 
+    budgetAmount = mostRecentBudget.length > 0 ? mostRecentBudget[0].amount : undefined;
+
     currentMonthEntries = Entries.find({
       createdAt: {
         $gte: start,
@@ -47,19 +49,21 @@ Template.Home.helpers({
       }
     }).fetch();
 
-    if (currentMonthEntries.length > 0 ) {
+    if (currentMonthEntries.length > 0) {
       amounts = _.pluck(currentMonthEntries, "amount");
       amountsTotal = _.reduce(amounts, function(memo, num) {
         return memo + num;
       });
-      return mostRecentBudget[0].amount - amountsTotal;
     } else {
-      return mostRecentBudget[0].amount;
+      amountsTotal = 0;
     }
 
-    if (mostRecentBudget.length == 0) {
+    if (budgetAmount) {
+      return budgetAmount - amountsTotal;
+    } else {
       return 'not computed';
     }
+
   }
 });
 
