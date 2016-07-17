@@ -52,7 +52,11 @@ Template.Home.helpers({
     if (currentMonthEntries.length > 0) {
       amounts = _.pluck(currentMonthEntries, "amount");
       amountsTotal = _.reduce(amounts, function(memo, num) {
-        return memo + num;
+        var ent = parseFloat(num);
+        if (Number.isNaN(ent)) {
+          ent = 0
+        }
+        return memo + ent;
       });
     } else {
       amountsTotal = 0;
