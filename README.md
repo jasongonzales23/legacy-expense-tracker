@@ -1,0 +1,6 @@
+# Deploy
+
+```
+mupx deploy
+```
+
